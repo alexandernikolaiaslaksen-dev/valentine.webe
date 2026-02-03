@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yay! 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #ff1493, #ff69b4, #ff6b9d);
+            background-size: 400% 400%;
+            animation: rainbowShift 8s ease infinite;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Confetti falling */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.8;
+            animation: fall 3s ease-in forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 6rem;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.5);
+            animation: bounce 0.8s ease-in-out infinite;
+            letter-spacing: 5px;
+            margin-bottom: 2rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-50px) scale(1.1); }
+        }
+
+        .celebration-emoji {
+            font-size: 5rem;
+            margin: 2rem;
+            display: inline-block;
+            animation: spin 3s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .message {
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 2rem;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 255, 255, 0.3); }
+            50% { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 192, 203, 0.8); }
+        }
+
+        button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #ff6b9d, #c06c84);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.4);
+        }
+
+        .heart-rain {
+            position: fixed;
+            font-size: 3rem;
+            opacity: 0.7;
+            animation: fall 4s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="celebration-emoji">💕</div>
+        <h1>YAAAAAYYYYYYYYYY!!!</h1>
+        <div class="celebration-emoji">🎉</div>
+        
+        <p class="message">You just made me the happiest! 💖</p>
+        
+        <div class="celebration-emoji">💐</div>
+        
+        <p class="message">Happy Valentine's Day! 🌹</p>
+        
+        <button onclick="window.location.href='valentine.html'">Back to Start</button>
+    </div>
+
+    <script>
+        // Create confetti
+        const confettiChars = ['🎉', '💕', '💖', '💗', '🌹', '💐', '✨', '💝'];
+        
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.textContent = confettiChars[Math.floor(Math.random() * confettiChars.length)];
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+            confetti.style.animationDelay = Math.random() * 0.5 + 's';
+            document.body.appendChild(confetti);
+
+            setTimeout(() => confetti.remove(), 4500);
+        }
+
+        // Rapid confetti at start
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createConfetti, i * 50);
+        }
+
+        // Continue creating confetti
+        setInterval(createConfetti, 200);
+
+        // Create heart rain
+        function createHeartRain() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-rain');
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+            heart.style.animationDelay = Math.random() * 0.3 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 5300);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeartRain, 150);
+    </script>
+</body>
+</html>
